@@ -1,0 +1,48 @@
+nav {
+  text-align: center;
+}
+
+a {
+  margin: 1rem;
+}
+
+h1, h2 {
+  text-align: center;
+  margin: 3rem auto !important;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 22rem;
+  margin: 0 auto;
+}
+
+.plant-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  width: 70%;
+  margin: 3rem auto;
+}
+
+
+.plant-card {
+  max-width: 20rem;
+}
+
+.plant-card button {
+  margin: 0.5rem;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-decoration: solid underline rgba(8, 63, 26, 0.125);
+
+}
+.card-subtitle {
+  font-style: italic;
+  margin-bottom: 1rem !important;
+}
+
