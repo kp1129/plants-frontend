@@ -6,6 +6,7 @@ import axios from 'axios';
 const Register = () => {
     const [formValues, setFormValues] = useState({});
     let history = useHistory();
+    const phoneNumRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/i;
     const handleChange = (event) => {
         setFormValues({...formValues, [event.target.name]: event.target.value});
         console.log(formValues);
@@ -13,6 +14,11 @@ const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(formValues);
+        console.log('phone number', formValues.phoneNumber);
+        const re = /\D/g;
+        const cleanPhoneNumber = formValues.phoneNumber.replace(re, "");
+        console.log('clean phone number', cleanPhoneNumber);
+        setFormValues({...formValues, phoneNumber: cleanPhoneNumber});
         axios.post("http://localhost:5000/api/auth/register", formValues)
         .then(res => {
         
@@ -27,7 +33,6 @@ const Register = () => {
             history.push("/home");
         })
         .catch(err => console.log(err))
-
     }
   
   return (
@@ -40,15 +45,21 @@ const Register = () => {
     <Form onSubmit={handleSubmit} >
         <FormGroup>
             <Label htmlFor="username">Username</Label>
-                <Input type="text" placeholder="Username" name="username" id="username" value={formValues.username} onChange={handleChange} />
+                <Input required type="text" placeholder="Username" name="username" id="username" value={formValues.username} onChange={handleChange} />
         </FormGroup>
         <FormGroup>
             <Label htmlFor="password">Password</Label>
-                <Input type="password" placeholder="Password" name="password" id="password" value={formValues.password} onChange={handleChange} />
+                <Input required type="password" placeholder="Password" name="password" id="password" value={formValues.password} onChange={handleChange} />
+        </FormGroup>
+        <FormGroup>
+            <Label htmlFor="confirmPassword">Confirm password</Label>
+                <Input required type="password" placeholder="Confirm password" name="confirmPassword" id="confirmPassword" value={formValues.confirmPassword} onChange={handleChange} />
+                {!formValues.confirmPassword ? <p></p> : formValues.password === formValues.confirmPassword ? <p></p> : <p>Passwords must match</p>}
         </FormGroup>
         <FormGroup>
             <Label htmlFor="phoneNumber">Mobile number</Label>
-                <Input type="tel" placeholder="Mobile number" name="phoneNumber" id="phoneNumber" value={formValues.phoneNumber} onChange={handleChange} />
+                <Input required type="tel" placeholder="Mobile number" name="phoneNumber" id="phoneNumber" value={formValues.phoneNumber} onChange={handleChange} />
+                {!formValues.phoneNumber ? <p></p> : phoneNumRegex.test(formValues.phoneNumber) ? <p></p> : <p>Please provide a 10-digit phone number</p>}
         </FormGroup>
         <Button type="submit">Submit</Button>
     </Form>
