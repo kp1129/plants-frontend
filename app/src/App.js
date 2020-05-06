@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Register from './components/forms/Register';
 import Login from './components/forms/Login';
 import Dashboard from './components/Dashboard';
-// import Addplant from './components//forms/Addplant';
+import AddPlant from './components//forms/AddPlant';
 
 import './App.css';
 
@@ -30,7 +30,7 @@ const App = () => {
           <Dashboard />
         </Route>
         <Route exact path="/home/addnew">
-        {/* <Addplant /> */}
+        <AddPlant />
         </Route>
       </Switch>
     </Router>
