@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
-// import { axiosWithAuth } from '../../utils/axiosWithAuth';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
+import Image from '../Image';
+// // import plant images
+// import plant1 from '../../images/plant1.jpg';
+// import plant2 from '../../images/plant2.jpg';
+// import plant3 from '../../images/plant3.jpg';
+// import plant4 from '../../images/plant4.jpg';
+// import plant5 from '../../images/plant5.jpg';
+// import plant6 from '../../images/plant6.jpg';
 
-const Addplant = () => {
+const Addplant = ({ plantImages }) => {
     const [formValues, setFormValues] = useState({});
     const [dropDownValue, setDropDownValue] = useState("");
     let history = useHistory();
     const handleChange = (event) => {
         setFormValues({...formValues, [event.target.name]: event.target.value});
         console.log(formValues);
+    }
+    const handleImgTile = (tile) => {
+        setFormValues({...formValues, imageTile: tile});
+
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,7 +32,7 @@ const Addplant = () => {
         //         nickname: "",
         //         species: "",
         //         wateringFrequency: "",
-        //         image: "",
+        //         imageTile: "",
                 // notes: ""
         //     })
         //     history.push("/home");
@@ -38,13 +50,17 @@ const Addplant = () => {
     // the only optional field in the db is notes
 
   return (
-      <div className="addplant">
+      <div className="add-plant">
           <h2>Add new plant!</h2>
+          
     <Form onSubmit={handleSubmit} >
     <FormGroup>
-        {/* how do i want to handle image tile? */}
-            <Label htmlFor="image">Select image tile for your plant </Label>
-                <Input type="text" placeholder="image URL" name="image" id="image" value={formValues.image} onChange={handleChange} />
+        {/* how do i want to label this section and make it accessible? */}
+            <Label>Select image tile for your plant </Label>
+            <div className="imageTilesContainer">
+                {plantImages.map(imgObj => <Image selected={imgObj.selected} handleImgTile={handleImgTile} tile={imgObj.tile} src={imgObj.src} alt={imgObj.alt} />)}
+          </div>
+              
         </FormGroup>
 
         <FormGroup>
@@ -74,6 +90,7 @@ const Addplant = () => {
         
         <Button type="submit">Submit</Button>
     </Form>
+    <a href="https://www.vecteezy.com/free-vector/potted-plant">Potted Plant Vectors by Vecteezy</a>
     </div>
   );
 } 

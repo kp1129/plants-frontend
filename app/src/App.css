@@ -14,7 +14,7 @@ h1, h2 {
 form {
   display: flex;
   flex-direction: column;
-  width: 22rem;
+  width: 25rem;
   margin: 0 auto;
 }
 
@@ -46,3 +46,24 @@ form {
   margin-bottom: 1rem !important;
 }
 
+.imageTilesContainer {
+  display: flex;
+  flex-flow: column wrap;
+  height: 15rem;
+  align-items: space-evenly;
+  justify-content: space-evenly;
+  /* width: 22rem; */
+}
+
+.imageTilesContainer img {
+  width: 7rem;
+  border: 1px solid gray;
+}
+
+.add-plant a {
+  font-size: 0.75rem;
+}
+
+.activeImgTile {
+  border: 1px solid teal;
+}
