@@ -21,7 +21,7 @@ const Addplant = ({ plantImages }) => {
     }
     const handleImgTile = (tile) => {
         setFormValues({...formValues, imageTile: tile});
-
+        // dynamically change selected state so that i can apply and remove activeImgTile?
     }
     const handleSubmit = (event) => {
         event.preventDefault();

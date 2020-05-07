@@ -18,8 +18,8 @@ import "./App.css";
 
 const App = () => {
   const plantImages = [
-    { tile: 1, src: plant1, selected: false, alt: "plant with leaves - variant 1" },
-    { tile: 2, src: plant2, selected: false, alt: "plant with flowers - variant 1" },
+    { tile: 1, src: plant1, selected: false, alt: "plant with flowers - variant 1" },
+    { tile: 2, src: plant2, selected: false, alt: "plant with leaves - variant 1" },   
     { tile: 3, src: plant3, selected: false, alt: "succulent - variant 1" },
     { tile: 4, src: plant4, selected: false, alt: "plant with leaves - variant 2" },
     { tile: 5, src: plant5, selected: false, alt: "plant with flowers - variant 2" },
