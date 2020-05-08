@@ -2,16 +2,10 @@ import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
+import { connect } from 'react-redux';
 import Image from '../Image';
-// // import plant images
-// import plant1 from '../../images/plant1.jpg';
-// import plant2 from '../../images/plant2.jpg';
-// import plant3 from '../../images/plant3.jpg';
-// import plant4 from '../../images/plant4.jpg';
-// import plant5 from '../../images/plant5.jpg';
-// import plant6 from '../../images/plant6.jpg';
 
-const Addplant = ({ plantImages }) => {
+const Addplant = props => {
     const [formValues, setFormValues] = useState({});
     const [dropDownValue, setDropDownValue] = useState("");
     let history = useHistory();
@@ -58,7 +52,7 @@ const Addplant = ({ plantImages }) => {
         {/* how do i want to label this section and make it accessible? */}
             <Label>Select image tile for your plant </Label>
             <div className="imageTilesContainer">
-                {plantImages.map(imgObj => <Image selected={imgObj.selected} handleImgTile={handleImgTile} tile={imgObj.tile} src={imgObj.src} alt={imgObj.alt} />)}
+                {props.plantImages.map(imgObj => <Image selected={imgObj.selected} handleImgTile={handleImgTile} tile={imgObj.tile} src={imgObj.src} alt={imgObj.alt} />)}
           </div>
               
         </FormGroup>
@@ -95,4 +89,10 @@ const Addplant = ({ plantImages }) => {
   );
 } 
 
-export default Addplant;
+const mapStateToProps = state => {
+    return {
+        plantImages: state.plantImages
+    }
+}
+
+export default connect(mapStateToProps, {})(Addplant);
