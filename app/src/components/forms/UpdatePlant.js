@@ -1,67 +1,22 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import { imageTileSelected, addPlant } from '../../actions/plantActions';
 import { connect } from 'react-redux';
 import Image from '../Image';
 
-const AddPlant = props => {
-    const [formValues, setFormValues] = useState({});
-    const [dropDownValue, setDropDownValue] = useState("");
-    let history = useHistory();
-    const handleChange = (event) => {
-        setFormValues({...formValues, [event.target.name]: event.target.value});
-        console.log(formValues);
-    }
-    const handleImgTile = (tile) => {
-        setFormValues({...formValues, imageTile: tile});
-        // dynamically change 'selected' property in state 
-        // to toggle activeImgTile
-        props.imageTileSelected(tile);
-    }
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(formValues);
-        props.addPlant(formValues);
-        setFormValues({
-                    nickname: "",
-                    species: "",
-                    wateringFrequency: "",
-                    imageTile: "",
-                    notes: ""
-                });
-        history.push("/home");        
-        // axiosWithAuth().post("api/plants", formValues)
-        // .then(res => {
-        //     setFormValues({
-        //         nickname: "",
-        //         species: "",
-        //         wateringFrequency: "",
-        //         imageTile: "",
-                // notes: ""
-        //     })
-        //     history.push("/home");
-        // })
-        // .catch(err => console.log(err))
-    } 
-  
-    // need 
-    // nickname, character limit 50
-    // species
-    // imageTile
-    // notes, character limit 255
-    // wateringFrequency
-    // foreign key = users_id
-    // the only optional field in the db is notes
-
-  return (
+const UpdatePlant = props => {
+   let { id } = useParams();
+   let plantToUpdate = props.userPlants.filter(plant => plant.id === parseInt(id) );
+    console.log(plantToUpdate[0])
+   return (
       <div className="add-plant">
-          <h2>Add new plant!</h2>
+          <h2>Update {plantToUpdate[0].nickname}!</h2>
           
-    <Form onSubmit={handleSubmit} >
+    {/* <Form onSubmit={handleSubmit} >
     <FormGroup>
-        {/* how do i want to label this section and make it accessible? */}
+      
             <Label>Select image tile for your plant </Label>
             <div className="imageTilesContainer">
                 {props.plantImages.map(imgObj => <Image selected={imgObj.selected} handleImgTile={handleImgTile} tile={imgObj.tile} src={imgObj.src} alt={imgObj.alt} />)}
@@ -94,17 +49,19 @@ const AddPlant = props => {
         <Input type="textarea" name="notes" id="notes" placeholder="notes" value={formValues.notes} onChange={handleChange} />
       </FormGroup>
         
-        <Button type="submit">Submit</Button>
-    </Form>
+        <Button type="submit">Save Changes</Button>
+        <Button type="button">Delete Plant</Button>
+    </Form>*/}
     <a href="https://www.vecteezy.com/free-vector/potted-plant">Potted Plant Vectors by Vecteezy</a>
-    </div>
+    </div> 
   );
 } 
 
 const mapStateToProps = state => {
     return {
-        plantImages: state.plantImages
+        plantImages: state.plantImages,
+        userPlants: state.userPlants
     }
 }
 
-export default connect(mapStateToProps, {imageTileSelected, addPlant})(AddPlant);
+export default connect(mapStateToProps, {})(UpdatePlant);

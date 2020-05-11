@@ -19,7 +19,12 @@ const Register = () => {
         const cleanPhoneNumber = formValues.phoneNumber.replace(re, "");
         console.log('clean phone number', cleanPhoneNumber);
         setFormValues({...formValues, phoneNumber: cleanPhoneNumber});
-        axios.post("http://localhost:5000/api/auth/register", formValues)
+        const newUser = {
+            username: formValues.username,
+            password: formValues.password,
+            phoneNumber: formValues.phoneNumber
+        }
+        axios.post("http://localhost:5000/api/auth/register", newUser)
         .then(res => {
         
             let token = res.data.token;
