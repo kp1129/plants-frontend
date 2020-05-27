@@ -8,7 +8,6 @@ const Login = () => {
     let history = useHistory();
     const handleChange = (event) => {
         setFormValues({...formValues, [event.target.name]: event.target.value});
-        console.log(formValues);
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,11 +32,11 @@ const Login = () => {
           <Form onSubmit={handleSubmit}>
             <FormGroup>
               <Label htmlFor="username">Username</Label>
-              <Input type="text" placeholder="Username" name="username" id="username" value={formValues.username} onChange={handleChange} />
+              <Input required type="text" placeholder="Username" name="username" id="username" value={formValues.username} onChange={handleChange} />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="password">Password</Label>
-              <Input type="password" placeholder="Password" name="password" id="password" value={formValues.password} onChange={handleChange} /> 
+              <Input required type="password" placeholder="Password" name="password" id="password" value={formValues.password} onChange={handleChange} /> 
            </FormGroup> 
            <Button type="submit">Submit</Button>
           </Form>

@@ -10,7 +10,7 @@ const PlantsContainer = props => {
     }, [])
     return (
         <div className="plants-container">
-            {props.userPlants.map(plant => <PlantCard plant={plant}  />)}
+            {props.userPlants.map(plant => <PlantCard key={plant.id} plant={plant}  />)}
         </div>
     );
 }

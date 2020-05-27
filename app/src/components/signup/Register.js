@@ -38,14 +38,8 @@ const Register = ({ setIsLoading }) => {
             let token = res.data.token;
             window.localStorage.setItem("token", JSON.stringify(token));
             // clear form values
-            setFormValues({
-                username: "",
-                password: "",
-                confirmPassword: "",
-                phoneNumber: ""
-            });
-            // remove the loading spinner
-            setIsLoading(false);
+           
+            
             // route user to dashboard
             history.push("/home");
         })
