@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // import components
-import Register from "./components/forms/Register";
-import Login from "./components/forms/Login";
+import Signup from "./components/signup/Signup";
+import Login from "./components/signup/Login";
 import Dashboard from "./components/Dashboard";
 import AddPlant from "./components//forms/AddPlant";
 import UpdatePlant from './components/forms/UpdatePlant';
@@ -18,7 +18,7 @@ const App = () => {
       {/* Routes to render */}
       <Switch>
         <Route path="/signup">
-          <Register />
+          <Signup />
         </Route>
         <Route path="/login">
           <Login />

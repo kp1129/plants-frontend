@@ -1,51 +1,58 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const Register = () => {
-    const [formValues, setFormValues] = useState({});
-    let history = useHistory();
+// This component holds the user registration form and its logic
+const Register = ({ setIsLoading }) => {
+    const history = useHistory();
+    // controls form input values
+    const [formValues, setFormValues] = useState({});    
+    // regex to validate phone number in the form
     const phoneNumRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/i;
+    // update formValues with user input
     const handleChange = (event) => {
         setFormValues({...formValues, [event.target.name]: event.target.value});
-        console.log(formValues);
     }
+    // register new user
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(formValues);
-        console.log('phone number', formValues.phoneNumber);
+        // load the spinner
+        setIsLoading(true);
+        // standardize phone number format
         const re = /\D/g;
         const cleanPhoneNumber = formValues.phoneNumber.replace(re, "");
-        console.log('clean phone number', cleanPhoneNumber);
+        // update state with reformatted phone number
         setFormValues({...formValues, phoneNumber: cleanPhoneNumber});
+        // create new user object
         const newUser = {
             username: formValues.username,
             password: formValues.password,
             phoneNumber: formValues.phoneNumber
         }
+        // register new user in the database
         axios.post("http://localhost:5000/api/auth/register", newUser)
         .then(res => {
-        
+            // grab the token sent back by the server
+            // save it to localStorage
             let token = res.data.token;
             window.localStorage.setItem("token", JSON.stringify(token));
-
+            // clear form values
             setFormValues({
                 username: "",
                 password: "",
+                confirmPassword: "",
                 phoneNumber: ""
-            })
+            });
+            // remove the loading spinner
+            setIsLoading(false);
+            // route user to dashboard
             history.push("/home");
         })
         .catch(err => console.log(err))
-    }
-  
-  return (
-      <div className="register">
-          <nav className="front-page-nav">
-      <Link to="/register">SIGN UP</Link>
-      <Link to="/login">LOG IN</Link>
-      </nav>
+    }  
+  return (      
+      <div>
           <h1>Sign up!</h1>
     <Form onSubmit={handleSubmit} >
         <FormGroup>
@@ -69,6 +76,7 @@ const Register = () => {
         <Button type="submit">Submit</Button>
     </Form>
     </div>
+    
   );
 } 
 

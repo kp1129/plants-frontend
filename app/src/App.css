@@ -11,6 +11,10 @@ h1, h2 {
   margin: 3rem auto !important;
 }
 
+.loading-spinner {
+  text-align: center;
+}
+
 form {
   display: flex;
   flex-direction: column;
