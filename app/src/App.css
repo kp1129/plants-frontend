@@ -22,7 +22,7 @@ form {
   margin: 0 auto;
 }
 
-.plant-container {
+.plants-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
@@ -32,10 +32,19 @@ form {
 
 
 .plant-card {
-  max-width: 20rem;
+  display: flex;
+  direction: column;
+  width: 20rem;
+  padding: 0.5rem;
 }
 
-.plant-card button {
+.plant-card img {
+  align-self: center;
+  max-width: 10rem;
+}
+
+.update-btn {
+  align-self: flex-end;
   margin: 0.5rem;
 }
 
@@ -64,6 +73,8 @@ form {
   width: 7rem;
   /* border: 1px solid gray; */
 }
+
+
 
 .add-plant a {
   font-size: 0.75rem;

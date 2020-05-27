@@ -12,7 +12,6 @@ const AddPlant = props => {
     let history = useHistory();
     const handleChange = (event) => {
         setFormValues({...formValues, [event.target.name]: event.target.value});
-        console.log(formValues);
     }
     const handleImgTile = (tile) => {
         setFormValues({...formValues, imageTile: tile});
@@ -22,7 +21,6 @@ const AddPlant = props => {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(formValues);
         props.addPlant(formValues);
         setFormValues({
                     nickname: "",

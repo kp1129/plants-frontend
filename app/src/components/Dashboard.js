@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-//import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { Link } from 'react-router-dom';
 import PlantsContainer from './PlantsContainer';
 
+// user dashboard
 const Dashboard = () => {
-    
+    // Log Out functionality for logged in users
     const logout = () => {
         window.localStorage.removeItem('token');
     }
@@ -17,7 +17,6 @@ const Dashboard = () => {
             <Link to="/home/addnew">ADD PLANT</Link>
             <Link onClick={logout} to="/login">LOG OUT</Link>
             </nav>
-            <div>plants will go here</div>
             <PlantsContainer />
         </div>
     )
