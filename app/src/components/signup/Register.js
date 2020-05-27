@@ -36,10 +36,7 @@ const Register = ({ setIsLoading }) => {
             // grab the token sent back by the server
             // save it to localStorage
             let token = res.data.token;
-            window.localStorage.setItem("token", JSON.stringify(token));
-            // clear form values
-           
-            
+            window.localStorage.setItem("token", JSON.stringify(token));            
             // route user to dashboard
             history.push("/home");
         })
